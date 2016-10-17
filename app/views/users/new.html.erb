@@ -1,0 +1,14 @@
+<div class="container">
+  <%= form_for @user do |f| %>
+    <% if @user.errors.present? %>
+      <div class="alert alert-danger">
+        <%= @user.errors.full_messages.to_sentence %>
+      </div>
+    <% end %>
+    <%= f.text_field :name, class:'form-control', placeholder: 'Username' %>
+    <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+    <%= f.password_field :password, class: 'form-control', 'placeholder': 'Password' %>
+    <%= f.password_field :confirm_password, class: 'form-control', 'placeholder': 'Confirm password' %>
+    <%= f.submit "Create new user", class: "btn btn-success" %>
+  <% end %>
+</div>
