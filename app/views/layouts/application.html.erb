@@ -9,6 +9,23 @@
   </head>
 
   <body>
+    <div class="navbar">
+      <% if current_user %>
+        Welcome back, <%= current_user.name %>. <%= link_to 'Logout', logout_path, method: :delete, data: {confirm: "Are you sure?"} %>
+      <% else %>
+        <%= link_to 'Register', new_user_path %>
+        <%= link_to 'Login', new_session_path %>
+      <% end %>
+    </div>
+
+    <% if flash.any? %>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-danger">
+          <%= value %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
