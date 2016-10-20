@@ -17,6 +17,14 @@ class User < ApplicationRecord
     Message.where(sender: self)
   end
 
+  def conversation_with(user_id)
+    Message.all.between(self.id, user_id)
+  end
+
+  def number_unread_messages_with(user_id)
+    Message.all.between(self.id, user_id).unread.size
+  end
+
   def to_s
     "#{self.name}(#{self.email})"
   end

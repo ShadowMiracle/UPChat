@@ -1,3 +1,4 @@
+<% if false %>
 <h1>Messages#incoming</h1>
 
 <% current_user.incoming_messages.each do |message| %>
@@ -5,6 +6,18 @@
     <p><%= message.sender %>:<%= message.body %></p>
   <% else %>
     <p><strong><%= message.sender %>:<%= message.body %></strong></p>
-    <%= link_to "Mark as read", mark_as_read_messages_path(:id => message.id), :method => :post, class: "btn btn-success" %>
+    <%= link_to "Mark as read", mark_as_read_message_path(:id => message.id), :method => :post, class: "btn btn-success" %>
   <% end %>
+<% end %>
+
+
+<h1>Messages between</h1>
+<% current_user.conversation_with(5).each do |message| %>
+  <% if message.read? %>
+    <p><%= message.sender %>:<%= message.body %></p>
+  <% else %>
+    <p><strong><%= message.sender %>:<%= message.body %></strong></p>
+    <%= link_to "Mark as read", mark_as_read_message_path(:id => message.id), :method => :post, class: "btn btn-success" %>
+  <% end %>
+<% end %>
 <% end %>

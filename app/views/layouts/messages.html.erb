@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Upchat</title>
     <%= csrf_meta_tags %>
 
@@ -9,23 +12,139 @@
   </head>
 
   <body>
-    <div class="navbar">
-      <% if current_user %>
-        Welcome back, <%= current_user.name %>. <%= link_to 'Logout', logout_path, method: :delete, data: {confirm: "Are you sure?"} %>
-      <% else %>
-        <%= link_to 'Register', new_user_path %>
-        <%= link_to 'Login', new_session_path %>
-      <% end %>
-    </div>
+    <div class="container">
+      <!-- Navbar header -->
+      <div class="row">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right mu-main-nav">
+            <% if current_user %>
+              <li><%= link_to current_user.name, "#", class: "nav-link" %></p></li>
+              <li><%= link_to 'LOGOUT', logout_path, method: :delete, data: {confirm: "Are you sure?"}, class: "nav-link" %></li>
+            <% else %>
+              <li><%= link_to 'REGISTER', new_user_path, class: "nav-link" %></li>
+              <li><%= link_to 'LOGIN', new_session_path %></li>
+            <% end %>
+            <%= flash_messages %>
+          </ul>
+        </div><!--/.nav-collapse -->
+        <div class="nav navbar">
+          <%= link_to "New message", new_message_path, class: "nav-link" %>
+          <%= link_to "Add friend", friend_ships_new_path, class: "nav-link" %>
+          <%= link_to "Sent message", outgoing_messages_path, class: "nav-link" %>
+        </div>
+      </div>
+      <!-- End navbar header -->
 
-    <div class="navbar">
-      <%= link_to "New message", new_message_path, class: "nav-link" %>
-      <%= link_to "Add friend", friend_ships_new_path, class: "nav-link" %>
-      <%= link_to "Sent message", outgoing_messages_path, class: "nav-link" %>
-    </div>
+      <%= render "messages/messages" %>
 
-    <%= flash_messages %>
+      <%= flash_messages %>
 
-    <%= yield %>
+      <!-- Content -->
+      <div class="row">
+        <!-- Side bar -->
+        <div class="col-xs-4">
+          <div class="box box-success">
+            <!-- Start box header -->
+            <div class="box-header controller">
+              <strong>Friends</strong>
+              <!-- <div class="col-xs-4 text-center active"><i class="sidebar-controller fa fa-comments-o" data-sidebar = "messages"></i></div>
+              <div class="col-xs-4 text-center"><i class="sidebar-controller fa fa-users" data-sidebar = "users"></i></div>
+              <div class="col-xs-4 text-center"><i class="sidebar-controller fa fa-user-plus" data-sidebar = "add_user"></i></div> -->
+            </div>
+            <!-- End box header -->
+
+            <!-- Start box body -->
+            <div class="box-body">
+              <div id="sidebar">
+                <!-- Sidebar component -->
+
+              </div>
+            </div>
+            <!-- End box body -->
+
+            <!-- Start box footer -->
+            <div class="box-footer">
+              <div class="searchfield">
+                <input type="text" value="Search friends" />
+              </div>
+            </div>
+            <!-- End box footer -->
+          </div>
+          <!-- End box -->
+        </div>
+        <!-- End sidebar -->
+
+        <!-- Message content -->
+        <div class="col-xs-8">
+          <!-- Box content -->
+          <div class="box box-success">
+            <!-- Box header -->
+            <div class="box-header chat-messages-header">
+              With: <strong>Michael Bangalter</strong>
+            </div>
+            <!-- End box header -->
+
+            <!-- Box body -->
+            <div class="box-body">
+              <div id="chat-messages">
+                <label>Thursday 02</label>
+                <div class="message">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
+                  <div class="bubble">
+                    Really cool stuff!
+                    <div class="corner"></div>
+                    <span>3 min</span>
+                  </div>
+                </div>
+                <div class="message right">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/2_copy.jpg" />
+                  <div class="bubble">
+                    Can you share a link for the tutorial?
+                    <div class="corner"></div>
+                    <span>1 min</span>
+                  </div>
+                </div>
+                <div class="message">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
+                  <div class="bubble">
+                    Yeah, hold on
+                    <div class="corner"></div>
+                    <span>Now</span>
+                  </div>
+                </div>
+                <div class="message right">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/2_copy.jpg" />
+                  <div class="bubble">
+                    Can you share a link for the tutorial?
+                    <div class="corner"></div>
+                    <span>1 min</span>
+                  </div>
+                </div>
+                <div class="message">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
+                  <div class="bubble">
+                    Yeah, hold on
+                    <div class="corner"></div>
+                    <span>Now</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End box body -->
+
+            <!-- Box footer -->
+            <div class="box-footer">
+              <div id="sendmessage">
+                <input type="text" value="Send message..." />
+                <button id="send"></button>
+              </div>
+            </div>
+            <!-- End box footer -->
+          </div>
+          <!-- End message content -->
+        </div>
+        <!-- End content -->
+      </div>
+      <%= yield %>
   </body>
 </html>

@@ -34,6 +34,9 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.7'
 gem 'omniauth'
 gem 'omniauth-facebook', '~> 3.0.0'
 
+# Font awesome
+gem "font-awesome-rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

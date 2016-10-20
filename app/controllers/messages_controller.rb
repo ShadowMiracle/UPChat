@@ -5,6 +5,9 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
+  def index
+  end
+
   def create
     message_params[:sender] = current_user
     message_params[:recipient] = User.find(message_params[:recipient])

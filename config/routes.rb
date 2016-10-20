@@ -9,11 +9,11 @@ Rails.application.routes.draw do
     collection do
       get 'incoming'
       get 'outgoing'
-      post 'mark_as_read'
     end
 
     member do
-
+      post 'mark_as_read'
+      get 'index'
     end
   end
 
