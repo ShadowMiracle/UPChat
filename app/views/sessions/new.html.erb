@@ -6,5 +6,11 @@
     <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control" %>
     <%= submit_tag "Login", class: "form-control" %>
   <% end %>
+
+  OR
+
+  <%= form_tag "/auth/facebook" do %>
+    <%= submit_tag "Facebook", class: "form-control" %>
+  <% end %>
 </div>
 

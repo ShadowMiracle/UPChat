@@ -25,4 +25,15 @@ class SessionsController < ApplicationController
     flash.now[:success] = "Logged out successfully. Come back again"
     redirect_to root_path
   end
+
+  def callback
+    if user = User.from_omniauth(request.env['omniauth.auth'])
+      session[:user_id] = user.id
+      flash.now[:success] = "Login successfully"
+      redirect_to incoming_messages_path
+    else
+      flash.now[:error] = "Cant login! #{user.errors.full_messages.to_sentence}"
+      render 'new'
+    end
+  end
 end
