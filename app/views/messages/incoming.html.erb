@@ -1,0 +1,10 @@
+<h1>Messages#incoming</h1>
+
+<% current_user.incoming_messages.each do |message| %>
+  <% if message.read? %>
+    <p><%= message.sender %>:<%= message.body %></p>
+  <% else %>
+    <p><strong><%= message.sender %>:<%= message.body %></strong></p>
+    <%= link_to "Mark as read", mark_as_read_messages_path(:id => message.id), :method => :post, class: "btn btn-success" %>
+  <% end %>
+<% end %>

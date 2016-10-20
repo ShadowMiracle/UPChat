@@ -1,0 +1,10 @@
+<h1>Messages#incoming</h1>
+
+<% current_user.outgoing_messages.each do |message| %>
+  <p><%= message.sender %>:<%= message.body %></p>
+  <% if message.read? %>
+    <label><%= message.read_at %></label>
+  <% else %>
+    <label>Unread</label>
+  <% end %>
+<% end %>

@@ -1,12 +1,57 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+
   helper_method :current_user
+  helper_method :signed_in
+  helper_method :require_login
+  helper_method :skip_if_logged_in
+  helper_method :user_list
+  helper_method :friend_list
+  helper_method :not_friend_list
 
   protected
     def current_user
       return @current_user if @current_user
       if session[:user_id]
         @current_user = User.find(session[:user_id])
+      end
+    end
+
+    def signed_in
+      if session[:user_id].nil?
+        return false
+      else
+        return true
+      end
+    end
+
+    def require_login
+      if !signed_in
+        flash[:error] = "You must login to view content!"
+        redirect_to root_path
+      end
+    end
+
+    def user_list
+      User.where.not(id: current_user.id)
+    end
+
+    def friend_list
+      current_user.friends
+    end
+
+    def not_friend_list
+      if current_user.friends.nil?
+        User.all
+      else
+        User.where.not(id: friend_list.collect {|f| f.id })
+      end
+
+    end
+
+    def skip_if_logged_in
+      if signed_in
+        redirect_to incoming_messages_path
       end
     end
 end

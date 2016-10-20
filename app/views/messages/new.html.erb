@@ -1,0 +1,8 @@
+<p>New messages</p>
+<%= form_for @message do |f| %>
+  <%= collection_select(:message, :recipient, friend_list,
+                  :id, :name,
+                 {:prompt => 'Please select friend'}) %>
+  <%= f.text_field :body, placeholder: "Content" %>
+  <%= f.submit "Sent" %>
+<% end %>

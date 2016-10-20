@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if (@user.save)
       flash[:success] = "Create user successfully"
-      redirect_to root_path
+      redirect_to incoming_messages_path
     else
       render 'new'
     end
