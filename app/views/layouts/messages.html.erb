@@ -91,14 +91,20 @@
 
             <!-- Box footer -->
             <div id="sendmessage" class="box-footer">
-              <%= form_for @message, remote: true do |f| %>
+              <%= form_for @message, remote: true, class: 'form-inline' do |f| %>
                 <%= f.hidden_field :recipient, value: 0, :id => 'recipient_id' %>
-                <div class="form-group">
-                  <%= f.text_field :body, class: 'form-control', placeholder: 'Send message...' %>
+                <div class="col-xs-2 col-sm-2 footer-controller">
+                  <%= button_tag(:id =>'search-button', type: 'button', :class => "btn btn-none") do %>
+                    <i class="fa fa-paperclip"></i>
+                  <% end %>
+                  <%= button_tag(:id =>'search-button', type: 'button', :class => "btn btn-none") do %>
+                    <i class="fa fa-smile-o"></i>
+                  <% end %>
                 </div>
-                <div class="form-group">
-                    <%= f.submit 'Sign In', class: 'btn btn-block btn-info' %>
-                </div>
+                <%= f.text_field :body, class: 'col-xs-9 col-sm-9', placeholder: 'Send message...' %>
+                <%= button_tag(:id =>'search-button', :class => "btn btn-none col-xs-1 col-sm-1", placeholder: "Search" ) do %>
+                  <i class="fa fa-paper-plane"></i>
+                <% end %>
               <% end %>
             </div>
             <!-- End box footer -->

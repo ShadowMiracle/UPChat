@@ -8,7 +8,6 @@ class ConversationsController < ApplicationController
       @conversation = Conversation.find(params[:id])
     end
 
-
     @recipient = interlocutor(@conversation)
     @messages = @conversation.messages
 
@@ -19,6 +18,16 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js  {}
+    end
+  end
+
+  def mark_as_read
+    @conversation = Conversation.find(params[:id])
+    @messages = @conversation.messages
+    @messages.each do |message|
+      if !message.read? && current_user == message.recipient
+        message.mark_as_read!
+      end
     end
   end
 

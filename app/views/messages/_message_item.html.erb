@@ -11,7 +11,11 @@
   <div class="message right">
     <%= image_tag(message.sender.avatar_url) %>
     <div class="bubble">
-      <%= message.body %>
+      <% if !message.read? %>
+        <div class="unread"><%= message.body %></div>
+      <% else %>
+        <%= message.body %>
+      <% end %>
       <div class="corner"></div>
       <span><%= time_different_to_now(message) %></span>
     </div>

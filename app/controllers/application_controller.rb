@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
       if @different < 60
         return 'Just now'
       elsif @different < 60*60
-        return "#{(@different/60).round} minute ago"
+        return "#{(@different/60).round} min ago"
       else
         return message.created_at.strftime("%H:%m")
       end

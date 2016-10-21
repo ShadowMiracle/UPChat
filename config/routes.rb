@@ -12,12 +12,12 @@ Rails.application.routes.draw do
     end
 
     member do
-      post 'mark_as_read'
       get 'index'
     end
   end
 
   get 'conversations/show'
+  post 'conversations/mark_as_read'
 
   resources :sessions, only: [:new, :create]
   delete 'logout' => "sessions#destroy"

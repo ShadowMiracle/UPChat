@@ -39,13 +39,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  def mark_as_read
-    @message = Message.find params[:id]
-    if !@message.read? && current_user == @message.recipient
-      @message.mark_as_read!
-    end
-  end
-
   def incoming
   end
 

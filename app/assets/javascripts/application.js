@@ -23,6 +23,20 @@ var ready = function() {
    * recipient_id
    */
 
+  $('#sendmessage input').focus(function(e) {
+    var conversation_id = $('#sendmessage').data('conversation');
+    console.log(conversation_id)
+
+    if (conversation_id) {
+      $.ajax({
+        type: "POST",
+        url: "/conversations/mark_as_read",
+        data: { id: conversation_id},
+        success: function(data) {
+        }
+      });
+    }
+  });
 }
 
 $(document).ready(ready);
