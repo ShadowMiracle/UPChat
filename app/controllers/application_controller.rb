@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_list
   helper_method :friend_list
   helper_method :not_friend_list
+  helper_method :time_different_to_now
 
   protected
     def current_user
@@ -52,6 +53,18 @@ class ApplicationController < ActionController::Base
     def skip_if_logged_in
       if signed_in
         redirect_to incoming_messages_path
+      end
+    end
+
+    def time_different_to_now(message)
+      @different = Time.now - message.created_at
+
+      if @different < 60
+        return 'Just now'
+      elsif @different < 60*60
+        return "#{(@different/60).round} minute ago"
+      else
+        return message.created_at.strftime("%H:%m")
       end
     end
 end

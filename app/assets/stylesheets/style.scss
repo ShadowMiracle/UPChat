@@ -63,6 +63,10 @@ body {
   border-bottom: 1px solid #e7ebee;
 }
 
+.friend > div {
+  padding-left: 0
+}
+
 .friend:hover {
   background: #f1f4f6;
   cursor: pointer;

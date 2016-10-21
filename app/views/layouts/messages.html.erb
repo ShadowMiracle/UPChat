@@ -35,8 +35,6 @@
       </div>
       <!-- End navbar header -->
 
-      <%= render "messages/messages" %>
-
       <%= flash_messages %>
 
       <!-- Content -->
@@ -57,7 +55,7 @@
             <div class="box-body">
               <div id="sidebar">
                 <!-- Sidebar component -->
-
+                <%= render "users", users: friend_list %>
               </div>
             </div>
             <!-- End box body -->
@@ -79,65 +77,29 @@
           <!-- Box content -->
           <div class="box box-success">
             <!-- Box header -->
-            <div class="box-header chat-messages-header">
-              With: <strong>Michael Bangalter</strong>
+            <div id="chat-messages-header" class="box-header chat-messages-header">
+              <strong> Wellcome to UpChat <strong>
             </div>
             <!-- End box header -->
 
             <!-- Box body -->
             <div class="box-body">
               <div id="chat-messages">
-                <label>Thursday 02</label>
-                <div class="message">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
-                  <div class="bubble">
-                    Really cool stuff!
-                    <div class="corner"></div>
-                    <span>3 min</span>
-                  </div>
-                </div>
-                <div class="message right">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/2_copy.jpg" />
-                  <div class="bubble">
-                    Can you share a link for the tutorial?
-                    <div class="corner"></div>
-                    <span>1 min</span>
-                  </div>
-                </div>
-                <div class="message">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
-                  <div class="bubble">
-                    Yeah, hold on
-                    <div class="corner"></div>
-                    <span>Now</span>
-                  </div>
-                </div>
-                <div class="message right">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/2_copy.jpg" />
-                  <div class="bubble">
-                    Can you share a link for the tutorial?
-                    <div class="corner"></div>
-                    <span>1 min</span>
-                  </div>
-                </div>
-                <div class="message">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
-                  <div class="bubble">
-                    Yeah, hold on
-                    <div class="corner"></div>
-                    <span>Now</span>
-                  </div>
-                </div>
               </div>
             </div>
             <!-- End box body -->
 
             <!-- Box footer -->
-            <div class="box-footer">
-              <div id="sendmessage">
-                <input type="text" value="Send message..." />
-                <button id="send"></button>
-              </div>
+            <div id="sendmessage" class="box-footer">
+              <%= form_for @message, remote: true do |f| %>
+                <%= f.hidden_field :recipient, value: 0, :id => 'recipient_id' %>
+                <div class="form-group">
+                  <%= f.text_field :body, class: 'form-control', placeholder: 'Send message...' %>
+                </div>
+                <div class="form-group">
+                    <%= f.submit 'Sign In', class: 'btn btn-block btn-info' %>
+                </div>
+              <% end %>
             </div>
             <!-- End box footer -->
           </div>

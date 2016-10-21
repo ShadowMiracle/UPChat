@@ -1,0 +1,20 @@
+<div class="friend">
+  <div class="col-xs-3">
+    <% if !user.avatar_url.nil? %>
+      <%= image_tag(user.avatar_url) %>
+    <% else %>
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
+    <% end %>
+  </div>
+  <div class="col-xs-7">
+    <p>
+      <strong><%= user.name %></strong> <i class="fa fa-circle status avaiable"></i>
+      <span><%= user.email %></span>
+    </p>
+  </div>
+  <div class="col-xs-2">
+    <div class="pull-right">
+      <div class="badge bg-red">3</div>
+    </div>
+  </div>
+</div>

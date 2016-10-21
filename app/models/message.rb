@@ -4,21 +4,14 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
 
+  belongs_to :conversation
+
   scope :unread, -> {
     where(read_at: nil)
   }
 
-  scope :between, -> (sender_id, recipient_id) {
-    where("(sender_id = ? AND recipient_id = ?)
-        OR (sender_id = ? AND recipient_id = ?)", sender_id, recipient_id, recipient_id, sender_id)
-  }
-
-  scope :involving, -> (user_id) {
-    where("sender_id = ? OR recipient_id = ?", user_id, user_id)
-  }
-
   default_scope {
-    order('created_at DESC')
+    order('created_at ASC')
   }
 
   def mark_as_read!

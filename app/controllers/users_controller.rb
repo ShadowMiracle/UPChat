@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    users_params.avatar_url = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/#{1 + rand(5)}_copy.jpg"
     @user = User.new(users_params)
 
     if (@user.save)
@@ -16,6 +17,6 @@ class UsersController < ApplicationController
 
   private
     def users_params
-      params.require(:user).permit(:name, :email, :password)
+      @users_params ||= params.require(:user).permit(:name, :email, :password)
     end
 end

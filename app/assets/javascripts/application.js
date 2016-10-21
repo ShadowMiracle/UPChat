@@ -23,63 +23,6 @@ var ready = function() {
    * recipient_id
    */
 
-  $('.sidebar-controller').click(function(e) {
-    e.preventDefault();
-
-    var target = $(this).data('sidebar');
-
-    $.get("", function (data) {
-        $('#chatbox_' + conversation_id).html(data);
-    }, "html");
-  });
-
-
-
-  /**
-   * Used to minimize the chatbox
-   */
-
-  $(document).on('click', '.toggleChatBox', function(e) {
-    e.preventDefault();
-
-    var id = $(this).data('cid');
-    chatBox.toggleChatBoxGrowth(id);
-  });
-
-  /**
-   * Used to close the chatbox
-   */
-
-  $(document).on('click', '.closeChat', function(e) {
-    e.preventDefault();
-
-    var id = $(this).data('cid');
-    chatBox.close(id);
-  });
-
-
-  /**
-   * Listen on keypress' in our chat textarea and call the
-   * chatInputKey in chat.js for inspection
-   */
-
-  $(document).on('keydown', '.chatboxtextarea', function(event) {
-
-    var id = $(this).data('cid');
-    chatBox.checkInputKey(event, $(this), id);
-  });
-
-  /**
-   * When a conversation link is clicked show up the respective
-   * conversation chatbox
-   */
-
-  $('a.conversation').click(function(e) {
-    e.preventDefault();
-
-    var conversation_id = $(this).data('cid');
-    chatBox.chatWith(conversation_id);
-  });
 }
 
 $(document).ready(ready);

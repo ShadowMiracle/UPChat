@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020121524) do
+ActiveRecord::Schema.define(version: 20161020132105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,10 @@ ActiveRecord::Schema.define(version: 20161020121524) do
     t.integer  "recipient_id"
     t.text     "body"
     t.datetime "read_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "conversation_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
     t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
     t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end
@@ -56,4 +58,5 @@ ActiveRecord::Schema.define(version: 20161020121524) do
     t.index ["name"], name: "index_users_on_name", using: :btree
   end
 
+  add_foreign_key "messages", "conversations"
 end

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'conversations/show'
+
   resources :sessions, only: [:new, :create]
   delete 'logout' => "sessions#destroy"
 

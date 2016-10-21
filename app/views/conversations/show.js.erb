@@ -1,0 +1,3 @@
+$("#chat-messages").html("<%= escape_javascript(render "messages/messages", messages_group: @messages) %>");
+$("#chat-messages-header").html("<%= escape_javascript(render "messages/messages_header", recipient: @recipient, messages: @messages) %>");
+$("#recipient_id").val("<%= @recipient.id %>")
