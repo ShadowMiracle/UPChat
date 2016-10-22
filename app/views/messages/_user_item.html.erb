@@ -1,4 +1,8 @@
-<div class="friend">
+<% if conversation.nil? %>
+  <div class="friend">
+<% else %>
+  <div class="friend" id="conversation-<%= conversation.id %>">
+<% end %>
   <div class="col-xs-3">
     <% if !user.avatar_url.nil? %>
       <%= image_tag(user.avatar_url) %>
@@ -13,8 +17,10 @@
     </p>
   </div>
   <div class="col-xs-2">
-    <div class="pull-right">
-      <div class="badge bg-red">3</div>
-    </div>
+    <% if !conversation.nil? %>
+      <div class="pull-right">
+        <div class="badge bg-red"><%= conversation.unread_messages > 0? conversation.unread_messages: '' %></div>
+      </div>
+    <% end %>
   </div>
 </div>

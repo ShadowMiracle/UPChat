@@ -4,7 +4,7 @@
 
 Submitted by: **Nguyen Hoang Tu**
 
-Time spent: **5h45** hours
+Time spent: **16h** hours
 
 URL: **Insert your Heroku URL here**
 
@@ -38,7 +38,7 @@ The following **optional** functionality is complete:
 
 The following **additional** features are implemented:
 
-- [ ] (List anything else that you can get done to improve the app functionality!)
+- [x] (Add realtime chat)
 
 ## Video Walkthrough
 

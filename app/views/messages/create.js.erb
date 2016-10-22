@@ -1,13 +1,18 @@
 $("#chat-messages").html("<%= escape_javascript(render "messages/messages", messages_group: @messages) %>");
 <% publish_to "/conversations/#{Digest::SHA1.hexdigest('conversations'+@conversation.id.to_s)}" do %>
   <% if current_user != @recipient %>
-    $("#chat-messages").html("<%= escape_javascript(render "messages/messages", messages_group: @messages) %>");
-    $("#chat-messages").animate(
-      {
-        scrollTop: $('#chat-messages').get(0).scrollHeight
-      },
-      500
-    );
+    if ($("#sendmessage").data("conversation") == <%= @conversation.id %>) {
+      $("#chat-messages").html("<%= escape_javascript(render "messages/messages", messages_group: @messages) %>");
+      $("#chat-messages").animate(
+        {
+          scrollTop: $('#chat-messages').get(0).scrollHeight
+        },
+        500
+      );
+    } else {
+      var val = $("#conversation-" + <%= @conversation.id %>).find(".badge").html() >> 0;
+      $("#conversation-" + <%= @conversation.id %>).find(".badge").html(val + 1);
+    }
   <% end %>
 <% end %>
 

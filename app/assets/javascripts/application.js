@@ -38,6 +38,7 @@ var ready = function() {
       });
 
       $(".unread").removeClass("unread");
+      $("#conversation-" + conversation_id).find(".badge").html('');
     }
   });
 }
