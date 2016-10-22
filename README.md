@@ -38,7 +38,7 @@ The following **optional** functionality is complete:
 
 The following **additional** features are implemented:
 
-- [x] (Add realtime chat)
+* [x] Add realtime chat
 
 ## Video Walkthrough
 
