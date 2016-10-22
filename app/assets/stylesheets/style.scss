@@ -252,7 +252,7 @@ div.message.right .corner {
   background-size: cover;
   filter: alpha(opacity=20);
 
-  background-image: url(/assets/background.png);
+  background-image: url(image-path('background.png'));
   // filter: alpha(opacity=10000);
   opacity: 1;
   z-index: -1;
