@@ -1,14 +1,29 @@
-<div class="container">
-  <%= form_for @user do |f| %>
-    <% if @user.errors.present? %>
-      <div class="alert alert-danger">
-        <%= @user.errors.full_messages.to_sentence %>
-      </div>
-    <% end %>
-    <%= f.text_field :name, class:'form-control', placeholder: 'Username' %>
-    <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
-    <%= f.password_field :password, class: 'form-control', 'placeholder': 'Password' %>
-    <%= f.password_field :confirm_password, class: 'form-control', 'placeholder': 'Confirm password' %>
-    <%= f.submit "Create new user", class: "btn btn-success" %>
-  <% end %>
+<div style="margin-top: 100px"></div>
+<div class="col-xs-6">
+  <div class="info">
+    <div class="info-text"><strong>Owl</strong>Chat</div class="info-text">
+    <label>Connecting the people</label>
+  </div>
+</div>
+<div class="col-xs-6">
+  <div class="box box-widget">
+    <div class="box-body" style="padding: 10px 50px 50px 50px">
+      <h1>REGISTER</h1>
+      <%= form_for @user do |f| %>
+        <% if @user.errors.present? %>
+          <div class="alert alert-danger">
+            <%= @user.errors.full_messages.to_sentence %>
+          </div>
+        <% end %>
+        <div class="form-group"><%= f.text_field :name, class:'form-control', placeholder: 'Username' %></div>
+        <div class="form-group"><%= f.text_field :email, class: 'form-control', placeholder: 'Email' %></div>
+        <div class="form-group"><%= f.password_field :password, class: 'form-control', 'placeholder': 'Password' %></div>
+        <div class="form-group"><%= f.password_field :confirm_password, class: 'form-control', 'placeholder': 'Confirm password' %></div>
+        <div class="form-group"><%= f.submit "Create new user", class: "btn btn-primary form-control" %></div>
+      <% end %>
+      By signing up you agree to <u>Terms of Use</u> and <u>Privacy</u>
+
+    </div>
+  </div>
+
 </div>

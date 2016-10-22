@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require private_pub
 //= require_tree .
 
 var ready = function() {
@@ -35,6 +36,8 @@ var ready = function() {
         success: function(data) {
         }
       });
+
+      $(".unread").removeClass("unread");
     }
   });
 }

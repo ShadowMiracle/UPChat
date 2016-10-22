@@ -2,4 +2,5 @@ $("#chat-messages").html("<%= escape_javascript(render "messages/messages", mess
 $("#chat-messages-header").html("<%= escape_javascript(render "messages/messages_header", recipient: @recipient, messages: @messages) %>");
 $("#recipient_id").val("<%= @recipient.id %>");
 $("#sendmessage").attr("data-conversation", "<%= @conversation.id %>");
+$("#sendmessage").removeClass("hidden");
 $("#chat-messages").scrollTop($('#chat-messages').get(0).scrollHeight);

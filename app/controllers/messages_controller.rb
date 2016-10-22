@@ -5,9 +5,6 @@ class MessagesController < ApplicationController
   def new
   end
 
-  def index
-  end
-
   def create
     @recipient = User.find(message_params[:recipient])
     message_params[:sender] = current_user
@@ -23,19 +20,19 @@ class MessagesController < ApplicationController
 
     if @message.save!
       flash.now[:success] = "Successfully send messages"
+      @messages = @conversation.messages
+      @messages = @messages.group_by { |message|
+        message.created_at.to_date
+      }
+      @path = conversations_show_path(@conversation)
+
+      respond_to do |format|
+        format.html {}
+        format.js  {}
+      end
       # redirect_to incoming_messages_path
     else
       flash.now[:error] = @message.errors.full_messages.to_sentence
-    end
-
-    @messages = @conversation.messages
-    @messages = @messages.group_by { |message|
-      message.created_at.to_date
-    }
-
-    respond_to do |format|
-      format.html {}
-      format.js  {}
     end
   end
 

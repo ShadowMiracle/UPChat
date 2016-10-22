@@ -4,12 +4,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    users_params.avatar_url = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/#{1 + rand(5)}_copy.jpg"
+    users_params[:avatar_url] = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/#{1 + rand(5)}_copy.jpg"
     @user = User.new(users_params)
 
     if (@user.save)
       flash[:success] = "Create user successfully"
-      redirect_to incoming_messages_path
+      session[:user_id] = @user.id
+      redirect_to new_message_path
     else
       render 'new'
     end

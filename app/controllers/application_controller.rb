@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  require 'digest/sha1'
   protect_from_forgery with: :exception
 
   helper_method :current_user
@@ -45,14 +46,14 @@ class ApplicationController < ActionController::Base
       if current_user.friends.nil?
         User.all
       else
-        User.where.not(id: friend_list.collect {|f| f.id })
+        User.where.not(id: friend_list.collect {|f| f.id } + [current_user.id])
       end
 
     end
 
     def skip_if_logged_in
       if signed_in
-        redirect_to incoming_messages_path
+        redirect_to new_message_path
       end
     end
 

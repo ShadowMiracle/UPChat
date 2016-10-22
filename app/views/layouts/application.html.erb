@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Upchat</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OwlChat</title>
     <%= csrf_meta_tags %>
 
+    <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Enriqueta' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class="navbar">
-      <% if current_user %>
-        Welcome back, <%= current_user.name %>. <%= link_to 'Logout', logout_path, method: :delete, data: {confirm: "Are you sure?"} %>
-      <% else %>
-        <%= link_to 'Register', new_user_path %>
-        <%= link_to 'Login', new_session_path %>
-      <% end %>
+    <div class="background"></div>
+      <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- LOGO -->
+            <!--  Image based logo  -->
+            <%= link_to image_tag("logo.png", height: 75), root_path %>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul id="top-menu" class="nav navbar-nav navbar-right">
+              <% if current_user %>
+                <li><%= link_to "#{current_user.name} #{image_tag(current_user.avatar_url, size: '40x40', class: 'img img-circle')}".html_safe, "#", class: "nav-link" %></li>
+                <li><%= link_to "Messages", new_message_path, class: "nav-link" %></li>
+                <li><%= link_to "Friends", friend_ships_new_path, class: "nav-link" %></li>
+                <li><%= link_to 'Logout', logout_path, method: :delete, data: {confirm: "Are you sure?"}, class: 'nav-link' %></li>
+              <% else %>
+                <li><%= link_to 'Register', new_user_path, class: 'nav-link' %></li>
+                <li><%= link_to 'Login', new_session_path, class: 'nav-link' %></li>
+              <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>
+      </div>
+      <!-- End navbar header -->
+      <div class="container">
+        <div id="flash">
+          <%= flash_messages %>
+        </div>
+        <%= yield %>
+      </div>
     </div>
-
-    <div id="flash">
-      <%= flash_messages %>
-    </div>
-
-    <%= yield %>
   </body>
 </html>

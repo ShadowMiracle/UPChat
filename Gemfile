@@ -37,6 +37,13 @@ gem 'omniauth-facebook', '~> 3.0.0'
 # Font awesome
 gem "font-awesome-rails"
 
+# Pub sub
+gem 'private_pub'
+gem 'thin'
+
+# Pagination
+gem 'kaminari'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

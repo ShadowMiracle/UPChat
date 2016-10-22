@@ -1,29 +1,41 @@
-<div class="container">
-<h2>Friends</h2>
-<ul>
-  <% friend_list.each do |user| %>
-    <li>
-      <%= render "user", user: user %>
-      (<%= link_to "remove", remove_friend_path(:friend_id => user.id), :method => :delete %>)
-    </li>
-  <% end %>
-</ul>
-
-<h2>Add Friends</h2>
-<ul>
-  <% not_friend_list.each do |user| %>
-    <li>
-      <%= render "user", user: user %>
-      (<%= link_to "Add", add_friend_path(:friend_id => user.id), :method => :post %>)
-    </li>
-  <% end %>
-</ul>
-
-<h2>Friended by Users</h2>
+<!-- <h2>Friended by Users</h2> -->
 <ul>
   <% current_user.inverse_friends do |user| %>
-    <%= render "user", user: user %>
+    <%= render "user", user: user, action: "delete" %>
     <%= link_to "Add Friend", add_friend_path(:friend_id => user.id), :method => :post %>
   <% end %>
 </ul>
+<div class="col-xs-6">
+  <div class="box box-widget">
+    <div class="box-header controller">
+      <strong>Friends</strong>
+    </div>
+    <div class="box-body">
+      <div class="fix-size">
+        <% if friend_list.size == 0 %>
+          <p>You don't have any friends. Let's find friends now</p>
+        <% else %>
+          <% friend_list.each do |user| %>
+            <%= render "user", user: user, user_action: "delete" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+<div class="col-xs-6">
+  <div class="box box-widget">
+    <div class="box-header controller">
+      <strong>Find friends</strong>
+    </div>
+    <div class="box-body">
+      <div class="fix-size">
+        <% not_friend_list.each do |user| %>
+          <%= render "user", user: user, user_action: "add" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

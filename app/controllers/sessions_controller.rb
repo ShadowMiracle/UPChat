@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      redirect_to messages_path
+    end
   end
 
   def create
@@ -9,7 +12,7 @@ class SessionsController < ApplicationController
         # Add user_id to session
         session[:user_id] = @user.id
         flash.now[:success] = "Login successfully"
-        redirect_to incoming_messages_path
+        redirect_to new_message_path
       else
         flash.now[:error] = "Incorrect password"
         render 'new'
@@ -30,7 +33,7 @@ class SessionsController < ApplicationController
     if user = User.from_omniauth(request.env['omniauth.auth'])
       session[:user_id] = user.id
       flash.now[:success] = "Login successfully"
-      redirect_to incoming_messages_path
+      redirect_to new_message_path
     else
       flash.now[:error] = "Cant login! #{user.errors.full_messages.to_sentence}"
       render 'new'

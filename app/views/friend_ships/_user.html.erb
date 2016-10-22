@@ -1,4 +1,20 @@
-<div class="row">
-  <strong><%= user.name %></strong>(<%= user.email %>)
+<div class="friend">
+  <div class="col-xs-3">
+    <% if !user.avatar_url.nil? %>
+      <%= image_tag(user.avatar_url) %>
+    <% else %>
+      <%= image_tag("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/#{1 + rand(5)}_copy.jpg") %>
+    <% end %>
+  </div>
+  <div class="col-xs-7">
+    <p>
+      <strong><%= user.name %></strong> <!-- <i class="fa fa-circle status avaiable"></i> --><br>
+      <span><%= user.email %></span>
+    </p>
+  </div>
+  <% if user_action == 'add' %>
+    <div class="col-xs-2"><%= link_to "Add", add_friend_path(:friend_id => user.id), :method => :post, class: 'btn btn-success' %></div>
+  <% elsif user_action == 'delete'%>
+    <div class="col-xs-2"><%= link_to "remove", remove_friend_path(:friend_id => user.id), :method => :delete, class: 'btn btn-danger' %></div>
+  <% end %>
 </div>
-

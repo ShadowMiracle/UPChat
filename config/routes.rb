@@ -5,25 +5,27 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :messages do
-    collection do
-      get 'incoming'
-      get 'outgoing'
-    end
+  # resources :messages do
+  #   collection do
+  #     get 'incoming'
+  #     get 'outgoing'
+  #   end
 
-    member do
-      get 'index'
-    end
-  end
+  #   member do
+  #   end
+  # end
+
+  resources :messages, only: [:new, :create]
 
   get 'conversations/show'
   post 'conversations/mark_as_read'
+  get 'conversations/:id' => 'conversations#subscribe'
 
   resources :sessions, only: [:new, :create]
   delete 'logout' => "sessions#destroy"
 
   get 'auth/:provider/callback' => 'sessions#callback'
 
-  root "home#index"
+  root 'sessions#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

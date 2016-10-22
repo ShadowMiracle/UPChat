@@ -1,6 +1,9 @@
 class ConversationsController < ApplicationController
   layout false
 
+  def subscribe
+  end
+
   def show
     if params[:id].nil?
       @conversation = Conversation.create!(sender_id: params[:sender_id], recipient_id: params[:recipient_id])

@@ -1,8 +1,101 @@
-<p>New messages</p>
-<%= form_for @message do |f| %>
-  <%= collection_select(:message, :recipient, friend_list,
-                  :id, :name,
-                 {:prompt => 'Please select friend'}) %>
-  <%= f.text_field :body, placeholder: "Content" %>
-  <%= f.submit "Sent" %>
-<% end %>
+<!-- Content -->
+<div class="row">
+  <!-- Side bar -->
+  <div class="col-xs-4">
+    <div class="box box-success">
+      <!-- Start box header -->
+      <div class="box-header controller">
+        <strong>Friends</strong>
+        <!-- <div class="col-xs-4 text-center active"><i class="sidebar-controller fa fa-comments-o" data-sidebar = "messages"></i></div>
+        <div class="col-xs-4 text-center"><i class="sidebar-controller fa fa-users" data-sidebar = "users"></i></div>
+        <div class="col-xs-4 text-center"><i class="sidebar-controller fa fa-user-plus" data-sidebar = "add_user"></i></div> -->
+      </div>
+      <!-- End box header -->
+
+      <!-- Start box body -->
+      <div class="box-body">
+        <div id="sidebar" class="fix-size">
+          <!-- Sidebar component -->
+          <%= render "users", users: friend_list %>
+        </div>
+      </div>
+      <!-- End box body -->
+
+      <!-- Start box footer -->
+      <div class="box-footer">
+        <div class="searchfield">
+          <input type="text" value="Search friends" />
+        </div>
+      </div>
+      <!-- End box footer -->
+    </div>
+    <!-- End box -->
+  </div>
+  <!-- End sidebar -->
+
+  <!-- Message content -->
+  <div class="col-xs-8">
+    <!-- Box content -->
+    <div class="box box-success">
+      <!-- Box header -->
+      <div id="chat-messages-header" class="box-header chat-messages-header">
+        <strong> Wellcome to OwlChat <strong>
+      </div>
+      <!-- End box header -->
+
+      <!-- Box body -->
+      <div class="box-body">
+        <div id="chat-messages" class="fix-size">
+          <div class="text-center">
+            <%= image_tag("logo.png", height: 100)%>
+          </div>
+            <label>Manual</label>
+              <div class="message">
+                <%= image_tag("owl_avt.png")%>
+                <div class="bubble">
+                  Select friends and start your conversations now
+                  <div class="corner"></div>
+                </div>
+              </div>
+              <div class="message">
+                <%= image_tag("owl_avt.png")%>
+                <div class="bubble">
+                  Make as much as friends you can
+                  <div class="corner"></div>
+                </div>
+              </div>
+              <div class="message">
+                <%= image_tag("owl_avt.png")%>
+                <div class="bubble">
+                  Never, ever underestimate the importance of having fun.
+                  <div class="corner"></div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <!-- End box body -->
+
+      <!-- Box footer -->
+      <div id="sendmessage" class="box-footer hidden">
+        <%= form_for @message, remote: true, class: 'form-inline' do |f| %>
+          <%= f.hidden_field :recipient, value: 0, :id => 'recipient_id' %>
+          <div class="col-xs-2 col-sm-2 footer-controller">
+            <%= button_tag(:id =>'search-button', type: 'button', :class => "btn btn-none") do %>
+              <i class="fa fa-paperclip"></i>
+            <% end %>
+            <%= button_tag(:id =>'search-button', type: 'button', :class => "btn btn-none") do %>
+              <i class="fa fa-smile-o"></i>
+            <% end %>
+          </div>
+          <%= f.text_field :body, class: 'col-xs-9 col-sm-9', placeholder: 'Send message...' %>
+          <%= button_tag(:id =>'search-button', :class => "btn btn-none col-xs-1 col-sm-1", placeholder: "Search" ) do %>
+            <i class="fa fa-paper-plane"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- End box footer -->
+    </div>
+    <!-- End message content -->
+  </div>
+  <!-- End content -->
+</div>
